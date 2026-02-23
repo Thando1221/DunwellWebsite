@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import campaignWomensDay from "@/assets/campaign-womens-day.jpg";
 import campaignHiv from "@/assets/campaign-hiv.jpg";
 import campaignStudent from "@/assets/campaign-student.jpg";
@@ -91,12 +92,12 @@ const CampaignsSection = () => {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">{c.period}</span>
-                <a href="tel:0721760247">
+                <Link to="/book">
                   <Button size="sm" className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-1">
                     <Phone className="w-3 h-3" />
                     Book Now
                   </Button>
-                </a>
+                </Link>
               </div>
               </div>
             </motion.div>

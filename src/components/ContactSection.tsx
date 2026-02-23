@@ -22,8 +22,10 @@ const ContactSection = () => {
           <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2">Visit Our Clinic</h2>
         </motion.div>
 
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+          {/* Contact Info */}
           <div className="bg-card rounded-2xl p-8 border border-border space-y-6">
+            <h3 className="font-heading font-bold text-lg mb-2">Contact Information</h3>
             {contactInfo.map((item) => (
               <a
                 key={item.label}
@@ -42,6 +44,25 @@ const ContactSection = () => {
               </a>
             ))}
           </div>
+
+          {/* Map */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl overflow-hidden border border-border h-[400px] md:h-full min-h-[300px]"
+          >
+            <iframe
+              title="Dunwell Youth Priority Clinic Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.5!2d28.0389!3d-26.1925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s38+De+Beer+Street%2C+Braamfontein%2C+Johannesburg!5e0!3m2!1sen!2sza!4v1700000000000"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

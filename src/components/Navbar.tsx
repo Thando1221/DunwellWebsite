@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
 
@@ -42,12 +43,12 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <a href="tel:0721760247" className="hidden sm:inline-flex">
+          <Link to="/book" className="hidden sm:inline-flex">
             <Button className="bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-full gap-2">
               <Phone className="w-4 h-4" />
               Book Now
             </Button>
-          </a>
+          </Link>
           <button className="lg:hidden p-2" onClick={() => setOpen(!open)}>
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -67,12 +68,12 @@ const Navbar = () => {
             </a>
           ))}
           <div className="px-6 pt-2">
-            <a href="tel:0721760247">
+            <Link to="/book">
               <Button className="w-full bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-full gap-2">
                 <Phone className="w-4 h-4" />
                 Book Now
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       )}
