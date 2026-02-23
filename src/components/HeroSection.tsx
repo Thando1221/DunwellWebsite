@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, Heart, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import clinicConsultation from "@/assets/clinic-consultation.jpeg";
 
@@ -44,11 +45,11 @@ const HeroSection = () => {
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
-            <a href="tel:0721760247">
+            <Link to="/book">
               <Button variant="outline" className="rounded-full px-8 py-6 text-base border-grey-mid/30 text-primary-foreground dark:text-foreground hover:bg-primary-foreground/10 dark:hover:bg-foreground/10">
                 Book Appointment
               </Button>
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-wrap gap-6 text-sm text-grey-mid dark:text-muted-foreground">
