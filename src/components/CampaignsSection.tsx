@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import campaignWomensDay from "@/assets/campaign-womens-day.jpg";
+import campaignHiv from "@/assets/campaign-hiv.jpg";
+import campaignStudent from "@/assets/campaign-student.jpg";
+import campaignMentalHealth from "@/assets/campaign-mental-health.jpg";
 
 const campaigns = [
   {
@@ -10,6 +14,7 @@ const campaigns = [
     desc: "Celebrate Women's Day with discounted wellness packages. Free Papsmear screening, discounted glow drips, and comprehensive women's health checkups.",
     highlights: ["Free Papsmear", "Glow Drip – R150", "Full Checkup – R99"],
     period: "1 – 31 August",
+    image: campaignWomensDay,
   },
   {
     badge: "FREE Testing",
@@ -18,6 +23,7 @@ const campaigns = [
     desc: "Know your status. Free HIV testing, discounted PrEP & PEP, and confidential counselling sessions for all youth.",
     highlights: ["Free HIV Test", "PrEP/PEP – R30", "Counselling – Free"],
     period: "1 – 30 November",
+    image: campaignHiv,
   },
   {
     badge: "50% OFF",
@@ -26,6 +32,7 @@ const campaigns = [
     desc: "Exclusive health packages for university students. Show your student card and access discounted consultations, STI screening, and vitamin boosters.",
     highlights: ["Consultation – R25", "STI Screen – R40", "VitBco – R80"],
     period: "Feb & Jul (Registration)",
+    image: campaignStudent,
   },
   {
     badge: "FREE Session",
@@ -34,6 +41,7 @@ const campaigns = [
     desc: "Your mental health matters. Free initial counselling sessions and discounted wellness drips to help you destress and recharge.",
     highlights: ["1st Session Free", "Detox Drip – R120", "Recovery Drip – R130"],
     period: "1 – 31 October",
+    image: campaignMentalHealth,
   },
 ];
 
@@ -64,8 +72,12 @@ const CampaignsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-card dark:bg-secondary/30 rounded-2xl p-6 border border-border hover:border-gold/30 transition-all"
+              className="bg-card dark:bg-secondary/30 rounded-2xl overflow-hidden border border-border hover:border-gold/30 transition-all"
             >
+              <div className="h-48 overflow-hidden">
+                <img src={c.image} alt={c.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+              <div className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <span className="bg-gold text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">{c.badge}</span>
                 <span className="text-sm text-muted-foreground">{c.tag}</span>
@@ -85,6 +97,7 @@ const CampaignsSection = () => {
                     Book Now
                   </Button>
                 </a>
+              </div>
               </div>
             </motion.div>
           ))}
