@@ -109,22 +109,22 @@ const BookAppointment = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-navy dark:bg-card border-b border-border">
+      <div className="bg-navy border-b border-border">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => navigate("/")}
-              className="text-primary-foreground dark:text-foreground hover:bg-primary-foreground/10 dark:hover:bg-foreground/10 rounded-full"
+              className="text-primary-foreground hover:bg-primary-foreground/10 rounded-full"
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-primary-foreground dark:text-foreground">
+              <h1 className="text-2xl sm:text-3xl font-heading font-bold text-primary-foreground">
                 Book Appointment
               </h1>
-              <p className="text-grey-mid dark:text-muted-foreground text-sm">
+              <p className="text-grey-mid text-sm">
                 Schedule your visit to Dunwell Youth Priority Clinic
               </p>
             </div>

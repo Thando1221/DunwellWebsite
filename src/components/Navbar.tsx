@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "./ThemeToggle";
+
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -42,7 +42,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <Link to="/book" className="hidden sm:inline-flex">
             <Button className="bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-full gap-2">
               <Phone className="w-4 h-4" />
