@@ -23,7 +23,7 @@ const AboutSection = () => {
             Empowering Youth Through Quality Healthcare
           </h2>
           <p className="text-muted-foreground max-w-3xl mx-auto">
-            Dunwell Youth Priority Clinic is dedicated to providing accessible, affordable, and confidential healthcare services to young people. Located in the heart of Braamfontein, Johannesburg, we understand the unique health needs of youth and students.
+            Dunwell Youth Priority Clinic is a private health facility providing services including Consultations, Family Planning, HIV Management, STI Management, Skin Care, Vitamins, and Office Procedures. Located in the heart of Braamfontein, Johannesburg.
           </p>
         </motion.div>
 

@@ -14,7 +14,7 @@ const HeroSection = () => {
           alt="Dunwell Youth Priority Clinic consultation"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40 dark:from-background/95 dark:via-background/85 dark:to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 pt-24">
@@ -29,13 +29,13 @@ const HeroSection = () => {
             Youth-Focused Healthcare
           </span>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground dark:text-foreground leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground leading-tight mb-6">
             Your Health,{" "}
             <span className="text-gradient">Our Priority</span>
           </h1>
 
-          <p className="text-lg text-grey-mid dark:text-muted-foreground mb-8 max-w-lg">
-            Affordable, confidential healthcare services for young people in Braamfontein, Johannesburg. Free clinical & prevention services for students.
+          <p className="text-lg text-grey-mid mb-8 max-w-lg">
+            A private health facility providing Consultations, Family Planning, HIV Management, STI Management, Skin Care, Vitamins & Office Procedures.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-12">
@@ -46,16 +46,16 @@ const HeroSection = () => {
               </Button>
             </a>
             <Link to="/book">
-              <Button variant="outline" className="rounded-full px-8 py-6 text-base border-grey-mid/30 text-primary-foreground dark:text-foreground hover:bg-primary-foreground/10 dark:hover:bg-foreground/10">
+              <Button variant="outline" className="rounded-full px-8 py-6 text-base border-grey-mid/30 text-primary-foreground hover:bg-primary-foreground/10">
                 Book Appointment
               </Button>
             </Link>
           </div>
 
-          <div className="flex flex-wrap gap-6 text-sm text-grey-mid dark:text-muted-foreground">
+          <div className="flex flex-wrap gap-6 text-sm text-grey-mid">
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-gold" />
-              Free Prevention
+              Private Healthcare
             </div>
             <div className="flex items-center gap-2">
               <Heart className="w-4 h-4 text-gold" />

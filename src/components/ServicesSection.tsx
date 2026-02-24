@@ -1,57 +1,42 @@
 import { motion } from "framer-motion";
-import { ShieldCheck, Stethoscope, Sparkles, GraduationCap, CalendarCheck } from "lucide-react";
+import { Stethoscope, Sparkles, CalendarCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    icon: ShieldCheck,
-    title: "Prevention",
-    subtitle: "Proactive healthcare to keep you protected",
-    items: [
-      "Family Planning",
-      "Implanon Insertion",
-      "Implanon Removal",
-      "HIV PreP",
-      "HIV PEP",
-      "Emergency Pills",
-      "Papsmear",
-      "Prostate",
-      "Mental Health Counselling",
-    ],
-    note: "*Free for all students",
-    color: "text-green-500",
-  },
-  {
     icon: Stethoscope,
-    title: "Clinical",
+    title: "Clinical Services",
     subtitle: "Professional medical consultations & treatment",
     items: [
-      "Consultation",
-      "STI Treatment",
-      "HIV Care",
-      "Chronic Illness",
-      "Skin Care",
-      "Wound Care",
-      "Stitch Removal",
+      { name: "Consultation (incl meds)", price: "R250" },
+      { name: "Family Planning", price: "R150" },
+      { name: "Implanon Insertion", price: "R300" },
+      { name: "Implanon Removal", price: "R350" },
+      { name: "Pregnancy Test", price: "R50" },
+      { name: "HIV Testing", price: "R100" },
+      { name: "HIV PrEP/PEP", price: "R350" },
+      { name: "HIV Care (Excl labs)", price: "R350" },
+      { name: "Chronic Illness", price: "R300" },
+      { name: "STI Management", price: "R300" },
+      { name: "Acne Care", price: "R250" },
+      { name: "Papsmear / PSA", price: "R250" },
+      { name: "BP / HGT Check", price: "R50" },
     ],
-    note: "Prices include meds & exclude lab tests",
+    note: "Student discount: R50 on all clinical services",
     color: "text-blue-500",
   },
   {
     icon: Sparkles,
-    title: "Wellness",
+    title: "Wellness Services",
     subtitle: "Boost your health with our wellness services",
     items: [
-      "Pregnancy Test",
-      "BP / Glucose Test",
-      "HIV Test",
-      "VitBco / B12 / C",
-      "Glutathione",
-      "Detox Drip",
-      "Glow Drip",
-      "Recovery Drip",
-      "Energy Drip",
+      { name: "Vita Shots (Bco/C/B12/Magnesium)", price: "R50" },
+      { name: "Glutathione Shot", price: "R200" },
+      { name: "Glow Drip", price: "R500" },
+      { name: "Recovery Drip", price: "R400" },
+      { name: "Energy Drip", price: "R300" },
+      { name: "Hangover Drip", price: "R350" },
     ],
     note: "",
     color: "text-gold",
@@ -75,7 +60,7 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -92,9 +77,12 @@ const ServicesSection = () => {
               <p className="text-sm text-muted-foreground mb-4">{service.subtitle}</p>
               <ul className="space-y-2">
                 {service.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-                    {item}
+                  <li key={item.name} className="flex items-center justify-between text-sm">
+                    <span className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold" />
+                      {item.name}
+                    </span>
+                    <span className="font-semibold text-gold">{item.price}</span>
                   </li>
                 ))}
               </ul>
@@ -104,19 +92,6 @@ const ServicesSection = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Student pricing banner */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-10 bg-navy rounded-2xl p-6 text-center border border-gold/20"
-        >
-          <GraduationCap className="w-8 h-8 text-gold mx-auto mb-3" />
-          <p className="text-primary-foreground font-medium">
-            🎓 Clinical & Prevention Services excl. Papsmear & Prostate <span className="text-gold font-bold">R50 for Wits Students</span> — Bring your student card
-          </p>
-        </motion.div>
 
         {/* Online Bookings Allowed */}
         <motion.div
@@ -128,7 +103,7 @@ const ServicesSection = () => {
           <CalendarCheck className="w-8 h-8 text-gold mx-auto mb-3" />
           <h3 className="font-heading font-bold text-lg mb-2">Online Bookings Allowed</h3>
           <p className="text-muted-foreground text-sm mb-4">
-            Skip the queue — book your appointment online and we'll confirm via phone.
+            Skip the queue — book your appointment online and we'll confirm via WhatsApp.
           </p>
           <Link to="/book">
             <Button className="bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-full px-8">
