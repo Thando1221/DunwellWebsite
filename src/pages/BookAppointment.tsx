@@ -22,88 +22,103 @@ import { toast } from "sonner";
 import { ArrowLeft, CalendarCheck, GraduationCap } from "lucide-react";
 
 const services = [
-  { id: 1, name: "Consultation", price: 150, studentPrice: 50 },
-  { id: 2, name: "STI Treatment", price: 200, studentPrice: 50 },
-  { id: 3, name: "HIV Care", price: 180, studentPrice: 50 },
-  { id: 4, name: "Family Planning", price: 0, studentPrice: 0 },
-  { id: 5, name: "Implanon Insertion", price: 0, studentPrice: 0 },
-  { id: 6, name: "HIV PreP & PEP", price: 0, studentPrice: 0 },
-  { id: 7, name: "Emergency Pills", price: 0, studentPrice: 0 },
-  { id: 8, name: "Papsmear", price: 250, studentPrice: 250 },
-  { id: 9, name: "Prostate Screening", price: 300, studentPrice: 300 },
-  { id: 10, name: "Mental Health Counselling", price: 0, studentPrice: 0 },
-  { id: 11, name: "Chronic Illness Management", price: 200, studentPrice: 50 },
-  { id: 12, name: "Skin Care", price: 150, studentPrice: 50 },
-  { id: 13, name: "Wound Care", price: 120, studentPrice: 50 },
-  { id: 14, name: "Stitch Removal", price: 100, studentPrice: 50 },
-  { id: 15, name: "Pregnancy Test", price: 80, studentPrice: 80 },
-  { id: 16, name: "BP / Glucose Test", price: 50, studentPrice: 50 },
-  { id: 17, name: "HIV Test", price: 0, studentPrice: 0 },
-  { id: 18, name: "VitBco / B12 / C", price: 150, studentPrice: 150 },
-  { id: 19, name: "Glutathione", price: 250, studentPrice: 250 },
-  { id: 20, name: "Detox Drip", price: 200, studentPrice: 200 },
-  { id: 21, name: "Glow Drip", price: 250, studentPrice: 250 },
-  { id: 22, name: "Recovery Drip", price: 200, studentPrice: 200 },
-  { id: 23, name: "Energy Drip", price: 200, studentPrice: 200 },
+  { id: 1, name: "Consultation (incl meds)", price: 250, discount: 50 },
+  { id: 2, name: "Family Planning", price: 150, discount: 50 },
+  { id: 3, name: "Implanon Insertion", price: 300, discount: 50 },
+  { id: 4, name: "Implanon Removal", price: 350, discount: 50 },
+  { id: 5, name: "Pregnancy Test", price: 50, discount: 50 },
+  { id: 6, name: "HIV Testing", price: 100, discount: 50 },
+  { id: 7, name: "HIV PrEP/PEP", price: 350, discount: 50 },
+  { id: 8, name: "HIV Care (Excl labs)", price: 350, discount: 50 },
+  { id: 9, name: "Chronic Illness", price: 300, discount: 50 },
+  { id: 10, name: "STI Management", price: 300, discount: 50 },
+  { id: 11, name: "Acne Care", price: 250, discount: 50 },
+  { id: 12, name: "Papsmear / PSA", price: 250, discount: 50 },
+  { id: 13, name: "BP / HGT Check", price: 50, discount: 50 },
+  { id: 14, name: "Vita Shots (Bco/C/B12/Magnesium)", price: 50, discount: null },
+  { id: 15, name: "Glutathione Shot", price: 200, discount: null },
+  { id: 16, name: "Glow Drip", price: 500, discount: null },
+  { id: 17, name: "Recovery Drip", price: 400, discount: null },
+  { id: 18, name: "Energy Drip", price: 300, discount: null },
+  { id: 19, name: "Hangover Drip", price: 350, discount: null },
 ];
 
 const BookAppointment = () => {
   const navigate = useNavigate();
 
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [selectedService, setSelectedService] = useState("");
   const [appointmentDate, setAppointmentDate] = useState("");
-  const [appointmentTime, setAppointmentTime] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
   const [isStudent, setIsStudent] = useState(false);
-
-  const [medicalAidNumber, setMedicalAidNumber] = useState("");
-  const [medicalAidOption, setMedicalAidOption] = useState("");
-  const [mainMemberIdNo, setMainMemberIdNo] = useState("");
-  const [medicalAidMainMember, setMedicalAidMainMember] = useState("");
-  const [medicalAidName, setMedicalAidName] = useState("");
 
   const selectedServiceData = services.find((s) => s.name === selectedService);
 
   const finalPrice = useMemo(() => {
     if (!selectedServiceData) return 0;
-    return isStudent ? selectedServiceData.studentPrice : selectedServiceData.price;
+    if (isStudent && selectedServiceData.discount !== null) {
+      return selectedServiceData.discount;
+    }
+    return selectedServiceData.price;
   }, [selectedServiceData, isStudent]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!fullName || !phone || !selectedService || !appointmentDate || !appointmentTime || !paymentMethod) {
+    if (!firstName || !surname || !email || !dateOfBirth || !selectedService || !appointmentDate) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    if (paymentMethod === "medical-aid" && (!medicalAidNumber || !medicalAidName || !medicalAidOption || !medicalAidMainMember || !mainMemberIdNo)) {
-      toast.error("Please fill in all medical aid fields");
-      return;
-    }
+    // Build WhatsApp message
+    const fullName = `${firstName} ${surname}`;
+    const priceText = finalPrice === 0 ? "FREE" : `R${finalPrice.toFixed(2)}`;
+    const studentText = isStudent ? "Yes ✅" : "No";
 
-    // Store booking locally
+    const message = `📋 *NEW APPOINTMENT BOOKING*
+━━━━━━━━━━━━━━━━━━━━━
+
+👤 *Patient Details*
+• Name: ${fullName}
+• Email: ${email}
+• Date of Birth: ${dateOfBirth}
+• Student: ${studentText}
+
+🏥 *Appointment Details*
+• Service: ${selectedService}
+• Preferred Date: ${appointmentDate}
+• Price: ${priceText}
+
+━━━━━━━━━━━━━━━━━━━━━
+📍 Dunwell Youth Priority Clinic
+38 De Beer Street, Braamfontein`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/27721760247?text=${encodedMessage}`;
+
+    // Store booking locally as backup
     const bookings = JSON.parse(localStorage.getItem("dunwell_bookings") || "[]");
     bookings.push({
-      fullName,
-      phone,
+      firstName,
+      surname,
+      email,
+      dateOfBirth,
       service: selectedService,
       date: appointmentDate,
-      time: appointmentTime,
-      paymentMethod,
       isStudent,
       price: finalPrice,
       createdAt: new Date().toISOString(),
     });
     localStorage.setItem("dunwell_bookings", JSON.stringify(bookings));
 
-    toast.success("✅ Appointment booked successfully! We'll confirm via phone.");
-    navigate("/");
+    toast.success("✅ Redirecting to WhatsApp to confirm your booking...");
+
+    // Open WhatsApp
+    window.open(whatsappUrl, "_blank");
   };
 
-  // Get today's date for min date
   const today = new Date().toISOString().split("T")[0];
 
   return (
@@ -149,21 +164,42 @@ const BookAppointment = () => {
                 {/* Personal Info */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label>Full Name *</Label>
+                    <Label>Name *</Label>
                     <Input
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      placeholder="Enter your full name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="Enter your first name"
                       className="h-11"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Phone Number *</Label>
+                    <Label>Surname *</Label>
                     <Input
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. 072 176 0247"
-                      type="tel"
+                      value={surname}
+                      onChange={(e) => setSurname(e.target.value)}
+                      placeholder="Enter your surname"
+                      className="h-11"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Email *</Label>
+                    <Input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      type="email"
+                      className="h-11"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Date of Birth *</Label>
+                    <Input
+                      type="date"
+                      value={dateOfBirth}
+                      onChange={(e) => setDateOfBirth(e.target.value)}
                       className="h-11"
                     />
                   </div>
@@ -179,34 +215,23 @@ const BookAppointment = () => {
                     <SelectContent>
                       {services.map((s) => (
                         <SelectItem key={s.id} value={s.name}>
-                          {s.name} {s.price > 0 ? `- R${s.price}` : "- FREE"}
+                          {s.name} — R{s.price}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
 
-                {/* Date & Time */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label>Preferred Date *</Label>
-                    <Input
-                      type="date"
-                      value={appointmentDate}
-                      onChange={(e) => setAppointmentDate(e.target.value)}
-                      min={today}
-                      className="h-11"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Preferred Time *</Label>
-                    <Input
-                      type="time"
-                      value={appointmentTime}
-                      onChange={(e) => setAppointmentTime(e.target.value)}
-                      className="h-11"
-                    />
-                  </div>
+                {/* Appointment Date */}
+                <div className="space-y-2">
+                  <Label>Preferred Appointment Date *</Label>
+                  <Input
+                    type="date"
+                    value={appointmentDate}
+                    onChange={(e) => setAppointmentDate(e.target.value)}
+                    min={today}
+                    className="h-11"
+                  />
                 </div>
 
                 {/* Student Discount */}
@@ -220,54 +245,9 @@ const BookAppointment = () => {
                   />
                   <Label htmlFor="student" className="flex items-center gap-2 cursor-pointer">
                     <GraduationCap className="w-5 h-5 text-gold" />
-                    Wits / University Student (eligible for discount — bring student card)
+                    University Student (eligible for R50 discount on clinical services)
                   </Label>
                 </div>
-
-                {/* Payment */}
-                <div className="space-y-2">
-                  <Label>Payment Method *</Label>
-                  <Select value={paymentMethod} onValueChange={setPaymentMethod}>
-                    <SelectTrigger className="h-11">
-                      <SelectValue placeholder="Choose payment method" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="cash">Cash</SelectItem>
-                      <SelectItem value="card">Card Payment</SelectItem>
-                      <SelectItem value="medical-aid">Medical Aid</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Medical Aid Fields */}
-                {paymentMethod === "medical-aid" && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-muted rounded-xl p-4"
-                  >
-                    <div className="md:col-span-2 space-y-2">
-                      <Label>Medical Aid Name *</Label>
-                      <Input value={medicalAidName} onChange={(e) => setMedicalAidName(e.target.value)} className="h-11" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Medical Aid Number *</Label>
-                      <Input value={medicalAidNumber} onChange={(e) => setMedicalAidNumber(e.target.value)} className="h-11" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Medical Aid Option *</Label>
-                      <Input value={medicalAidOption} onChange={(e) => setMedicalAidOption(e.target.value)} className="h-11" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Main Member Name *</Label>
-                      <Input value={medicalAidMainMember} onChange={(e) => setMedicalAidMainMember(e.target.value)} className="h-11" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Main Member ID Number *</Label>
-                      <Input value={mainMemberIdNo} onChange={(e) => setMainMemberIdNo(e.target.value)} className="h-11" />
-                    </div>
-                  </motion.div>
-                )}
 
                 <div className="flex gap-4 pt-4">
                   <Button
@@ -275,7 +255,7 @@ const BookAppointment = () => {
                     className="flex-1 h-12 bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-xl gap-2"
                   >
                     <CalendarCheck className="w-5 h-5" />
-                    Book Appointment
+                    Book via WhatsApp
                   </Button>
                   <Button
                     type="button"
@@ -302,32 +282,28 @@ const BookAppointment = () => {
               </CardHeader>
               <CardContent className="space-y-4 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Patient:</span>
-                  <span className="font-medium">{fullName || "-"}</span>
+                  <span className="text-muted-foreground">Name:</span>
+                  <span className="font-medium">{firstName && surname ? `${firstName} ${surname}` : "-"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Phone:</span>
-                  <span className="font-medium">{phone || "-"}</span>
+                  <span className="text-muted-foreground">Email:</span>
+                  <span className="font-medium">{email || "-"}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Date of Birth:</span>
+                  <span className="font-medium">{dateOfBirth || "-"}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Service:</span>
                   <span className="font-medium">{selectedService || "-"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Date:</span>
+                  <span className="text-muted-foreground">Appointment Date:</span>
                   <span className="font-medium">{appointmentDate || "-"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Time:</span>
-                  <span className="font-medium">{appointmentTime || "-"}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Student:</span>
                   <span className="font-medium">{isStudent ? "Yes ✅" : "No"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Payment:</span>
-                  <span className="font-medium capitalize">{paymentMethod ? paymentMethod.replace("-", " ") : "-"}</span>
                 </div>
 
                 <div className="pt-4 border-t border-border">
@@ -337,16 +313,16 @@ const BookAppointment = () => {
                       {finalPrice === 0 ? "FREE" : `R${finalPrice.toFixed(2)}`}
                     </span>
                   </div>
-                  {isStudent && selectedServiceData && selectedServiceData.studentPrice < selectedServiceData.price && (
+                  {isStudent && selectedServiceData && selectedServiceData.discount !== null && selectedServiceData.discount < selectedServiceData.price && (
                     <p className="text-xs text-green-500 pt-2 flex items-center gap-1">
                       <GraduationCap className="w-3 h-3" />
-                      Student discount applied!
+                      Student discount applied! (R{selectedServiceData.discount})
                     </p>
                   )}
                 </div>
 
                 <div className="pt-4 border-t border-border text-xs text-muted-foreground space-y-2">
-                  <p>📞 We'll call to confirm your appointment</p>
+                  <p>📱 Booking will be sent via WhatsApp</p>
                   <p>🎓 Remember to bring your student card if applicable</p>
                   <p>📍 38 De Beer Street, Braamfontein</p>
                 </div>
