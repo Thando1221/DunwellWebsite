@@ -8,7 +8,7 @@ const TikTokIcon = () => (
 
 const Footer = () => {
   return (
-    <footer className="bg-navy dark:bg-card/50 py-10 border-t border-border">
+    <footer className="bg-navy py-10 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
@@ -16,8 +16,8 @@ const Footer = () => {
               <span className="font-heading font-bold text-accent-foreground text-sm">DW</span>
             </div>
             <div>
-              <p className="font-heading font-bold text-primary-foreground dark:text-foreground">DUNWELL</p>
-              <p className="text-xs text-grey-mid dark:text-muted-foreground tracking-wider uppercase">Youth Priority Clinic</p>
+              <p className="font-heading font-bold text-primary-foreground">DUNWELL</p>
+              <p className="text-xs text-grey-mid tracking-wider uppercase">Youth Priority Clinic</p>
             </div>
           </div>
 
@@ -26,7 +26,7 @@ const Footer = () => {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-primary-foreground/10 dark:bg-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground dark:text-foreground hover:text-gold"
+              className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground hover:text-gold"
             >
               <Instagram className="w-5 h-5" />
             </a>
@@ -34,7 +34,7 @@ const Footer = () => {
               href="https://www.tiktok.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-primary-foreground/10 dark:bg-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground dark:text-foreground hover:text-gold"
+              className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground hover:text-gold"
             >
               <TikTokIcon />
             </a>
@@ -48,7 +48,7 @@ const Footer = () => {
             </a>
           </div>
 
-          <p className="text-xs text-grey-mid dark:text-muted-foreground">
+          <p className="text-xs text-grey-mid">
             © {new Date().getFullYear()} Dunwell Youth Priority Clinic. All rights reserved.
           </p>
         </div>
