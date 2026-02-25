@@ -1,54 +1,21 @@
 import { motion } from "framer-motion";
-import { Phone } from "lucide-react";
+import { GraduationCap, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import campaignWomensDay from "@/assets/campaign-womens-day.jpg";
-import campaignHiv from "@/assets/campaign-hiv.jpg";
-import campaignStudent from "@/assets/campaign-student.jpg";
-import campaignMentalHealth from "@/assets/campaign-mental-health.jpg";
+import campaignStudent from "@/assets/campaign-student-discount.jpg";
 
-const campaigns = [
-  {
-    badge: "40% OFF",
-    tag: "Women's Day",
-    title: "Women's Day Special",
-    desc: "Celebrate Women's Day with discounted wellness packages. Free Papsmear screening, discounted glow drips, and comprehensive women's health checkups.",
-    highlights: ["Free Papsmear", "Glow Drip – R150", "Full Checkup – R99"],
-    period: "1 – 31 August",
-    image: campaignWomensDay,
-  },
-  {
-    badge: "FREE Testing",
-    tag: "HIV Awareness",
-    title: "HIV Awareness Month",
-    desc: "Know your status. Free HIV testing, discounted PrEP & PEP, and confidential counselling sessions for all youth.",
-    highlights: ["Free HIV Test", "PrEP/PEP – R30", "Counselling – Free"],
-    period: "1 – 30 November",
-    image: campaignHiv,
-  },
-  {
-    badge: "50% OFF",
-    tag: "Student Special",
-    title: "Student Health Week",
-    desc: "Exclusive health packages for university students. Show your student card and access discounted consultations, STI screening, and vitamin boosters.",
-    highlights: ["Consultation – R25", "STI Screen – R40", "VitBco – R80"],
-    period: "Feb & Jul (Registration)",
-    image: campaignStudent,
-  },
-  {
-    badge: "FREE Session",
-    tag: "Mental Health",
-    title: "Mental Health Awareness",
-    desc: "Your mental health matters. Free initial counselling sessions and discounted wellness drips to help you destress and recharge.",
-    highlights: ["1st Session Free", "Detox Drip – R120", "Recovery Drip – R130"],
-    period: "1 – 31 October",
-    image: campaignMentalHealth,
-  },
+const studentServices = [
+  { name: "Consultation (incl meds)", normal: "R250", student: "R50" },
+  { name: "Family Planning", normal: "R150", student: "R50" },
+  { name: "HIV Testing", normal: "R100", student: "R50" },
+  { name: "STI Management", normal: "R300", student: "R50" },
+  { name: "Acne Care", normal: "R250", student: "R50" },
+  { name: "BP / HGT Check", normal: "R50", student: "R50" },
 ];
 
 const CampaignsSection = () => {
   return (
-    <section id="campaigns" className="py-20 bg-navy dark:bg-card/50">
+    <section id="campaigns" className="py-20 bg-navy">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,55 +24,76 @@ const CampaignsSection = () => {
           className="text-center mb-14"
         >
           <span className="text-gold font-medium text-sm uppercase tracking-widest">Special Offers</span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2 mb-4 text-primary-foreground dark:text-foreground">
-            Campaigns & Specials
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2 mb-4 text-primary-foreground">
+            Student Discount
           </h2>
-          <p className="text-grey-mid dark:text-muted-foreground max-w-2xl mx-auto">
-            Take advantage of our seasonal health campaigns with exclusive discounts and free services for youth.
+          <p className="text-grey-mid max-w-2xl mx-auto">
+            Dunwell Youth Priority Clinic offers R50 on all clinical services for university students. Just bring your student card!
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {campaigns.map((c, i) => (
-            <motion.div
-              key={c.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card dark:bg-secondary/30 rounded-2xl overflow-hidden border border-border hover:border-gold/30 transition-all"
-            >
-              <div className="h-48 overflow-hidden">
-                <img src={c.image} alt={c.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-              </div>
-              <div className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="bg-gold text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">{c.badge}</span>
-                <span className="text-sm text-muted-foreground">{c.tag}</span>
-              </div>
-              <h3 className="text-xl font-heading font-bold mb-2">{c.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{c.desc}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {c.highlights.map((h) => (
-                  <span key={h} className="bg-muted text-foreground text-xs px-3 py-1.5 rounded-full font-medium">{h}</span>
-                ))}
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{c.period}</span>
-                <Link to="/book">
-                  <Button size="sm" className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-1">
-                    <Phone className="w-3 h-3" />
-                    Book Now
-                  </Button>
-                </Link>
-              </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto bg-card rounded-2xl overflow-hidden border border-border"
+        >
+          <div className="relative h-56 sm:h-64 overflow-hidden">
+            <img
+              src={campaignStudent}
+              alt="University students enjoying campus life"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-4 left-6 flex items-center gap-3">
+              <span className="bg-gold text-accent-foreground text-sm font-bold px-4 py-1.5 rounded-full flex items-center gap-1.5">
+                <GraduationCap className="w-4 h-4" />
+                R50 Student Special
+              </span>
+            </div>
+          </div>
 
-        <p className="text-center text-xs text-grey-mid dark:text-muted-foreground mt-8">
-          T&Cs apply. Specials valid during campaign periods only.
+          <div className="p-6 sm:p-8">
+            <h3 className="text-2xl font-heading font-bold mb-2">
+              All Clinical Services — Only R50
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Show your valid university student card and access any clinical service for just R50. Available year-round for registered students.
+            </p>
+
+            {/* Price comparison table */}
+            <div className="rounded-xl border border-border overflow-hidden mb-6">
+              <div className="grid grid-cols-3 bg-muted text-xs font-semibold uppercase tracking-wider px-4 py-3">
+                <span>Service</span>
+                <span className="text-center">Normal</span>
+                <span className="text-center text-gold">Student</span>
+              </div>
+              {studentServices.map((s) => (
+                <div key={s.name} className="grid grid-cols-3 px-4 py-3 border-t border-border text-sm">
+                  <span>{s.name}</span>
+                  <span className="text-center text-muted-foreground line-through">{s.normal}</span>
+                  <span className="text-center font-bold text-gold">{s.student}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-xs text-muted-foreground">
+                🎓 Valid student card required. Clinical services only — wellness drips excluded.
+              </p>
+              <Link to="/book">
+                <Button className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-2 px-6">
+                  <Phone className="w-4 h-4" />
+                  Book Now
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
+        <p className="text-center text-xs text-grey-mid mt-8">
+          T&Cs apply. Student discount valid with a valid university student card.
         </p>
       </div>
     </section>

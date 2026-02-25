@@ -23,7 +23,7 @@ const Footer = () => {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/dunwell_clinic/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground hover:text-gold"
@@ -31,7 +31,7 @@ const Footer = () => {
               <Instagram className="w-5 h-5" />
             </a>
             <a
-              href="https://www.tiktok.com/"
+              href="https://www.tiktok.com/@dunwell_clinic?_r=1&_t=ZS-94Dv9TCLStM"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground hover:text-gold"
@@ -39,7 +39,7 @@ const Footer = () => {
               <TikTokIcon />
             </a>
             <a
-              href="https://www.facebook.com/"
+              href="https://www.facebook.com/share/1KqaSmzonu/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-primary-foreground/10 dark:bg-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground dark:text-foreground hover:text-gold"

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Stethoscope, Sparkles, CalendarCheck } from "lucide-react";
+import { Stethoscope, Sparkles, CalendarCheck, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -23,13 +23,16 @@ const services = [
       { name: "Papsmear / PSA", price: "R250" },
       { name: "BP / HGT Check", price: "R50" },
     ],
-    note: "Student discount: R50 on all clinical services",
-    color: "text-blue-500",
+    badge: "R50 Student Discount",
+    badgeIcon: GraduationCap,
+    gradient: "from-blue-500/10 to-blue-600/5",
+    iconBg: "bg-blue-500/10",
+    iconColor: "text-blue-500",
   },
   {
     icon: Sparkles,
     title: "Wellness Services",
-    subtitle: "Boost your health with our wellness services",
+    subtitle: "Boost your health with premium wellness treatments",
     items: [
       { name: "Vita Shots (Bco/C/B12/Magnesium)", price: "R50" },
       { name: "Glutathione Shot", price: "R200" },
@@ -38,8 +41,11 @@ const services = [
       { name: "Energy Drip", price: "R300" },
       { name: "Hangover Drip", price: "R350" },
     ],
-    note: "",
-    color: "text-gold",
+    badge: null,
+    badgeIcon: null,
+    gradient: "from-amber-500/10 to-yellow-500/5",
+    iconBg: "bg-gold/10",
+    iconColor: "text-gold",
   },
 ];
 
@@ -60,7 +66,7 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -68,45 +74,65 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="bg-card rounded-2xl p-6 shadow-sm border border-border hover:shadow-lg hover:border-gold/30 transition-all duration-300 group"
+              className={`bg-card rounded-2xl overflow-hidden shadow-sm border border-border hover:shadow-xl hover:border-gold/30 transition-all duration-300 group`}
             >
-              <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-4 group-hover:bg-gold/10 transition-colors">
-                <service.icon className={`w-6 h-6 ${service.color}`} />
+              {/* Header gradient strip */}
+              <div className={`bg-gradient-to-r ${service.gradient} px-6 py-5 flex items-center justify-between`}>
+                <div className="flex items-center gap-3">
+                  <div className={`w-12 h-12 rounded-xl ${service.iconBg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                    <service.icon className={`w-6 h-6 ${service.iconColor}`} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-heading font-bold">{service.title}</h3>
+                    <p className="text-xs text-muted-foreground">{service.subtitle}</p>
+                  </div>
+                </div>
+                {service.badge && service.badgeIcon && (
+                  <span className="hidden sm:flex items-center gap-1.5 bg-gold/15 text-gold text-xs font-semibold px-3 py-1.5 rounded-full">
+                    <service.badgeIcon className="w-3.5 h-3.5" />
+                    {service.badge}
+                  </span>
+                )}
               </div>
-              <h3 className="text-xl font-heading font-bold mb-1">{service.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{service.subtitle}</p>
-              <ul className="space-y-2">
-                {service.items.map((item) => (
-                  <li key={item.name} className="flex items-center justify-between text-sm">
-                    <span className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-                      {item.name}
-                    </span>
-                    <span className="font-semibold text-gold">{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-              {service.note && (
-                <p className="text-xs text-muted-foreground mt-4 italic">{service.note}</p>
-              )}
+
+              {/* Items */}
+              <div className="px-6 py-4">
+                <ul className="divide-y divide-border">
+                  {service.items.map((item) => (
+                    <li key={item.name} className="flex items-center justify-between py-3 text-sm hover:bg-muted/50 -mx-2 px-2 rounded-lg transition-colors">
+                      <span className="flex items-center gap-2.5">
+                        <span className="w-2 h-2 rounded-full bg-gold shrink-0" />
+                        {item.name}
+                      </span>
+                      <span className="font-bold text-gold ml-4 whitespace-nowrap">{item.price}</span>
+                    </li>
+                  ))}
+                </ul>
+                {service.badge && (
+                  <p className="text-xs text-muted-foreground mt-3 italic flex items-center gap-1.5">
+                    <GraduationCap className="w-3.5 h-3.5 text-gold" />
+                    Student discount: R50 on all clinical services
+                  </p>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Online Bookings Allowed */}
+        {/* Online Bookings CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-6 bg-card rounded-2xl p-6 text-center border border-gold/30 shadow-sm"
+          className="mt-8 bg-card rounded-2xl p-8 text-center border border-gold/30 shadow-sm"
         >
-          <CalendarCheck className="w-8 h-8 text-gold mx-auto mb-3" />
-          <h3 className="font-heading font-bold text-lg mb-2">Online Bookings Allowed</h3>
-          <p className="text-muted-foreground text-sm mb-4">
+          <CalendarCheck className="w-10 h-10 text-gold mx-auto mb-4" />
+          <h3 className="font-heading font-bold text-xl mb-2">Online Bookings Allowed</h3>
+          <p className="text-muted-foreground text-sm mb-5 max-w-md mx-auto">
             Skip the queue — book your appointment online and we'll confirm via WhatsApp.
           </p>
           <Link to="/book">
-            <Button className="bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-full px-8">
+            <Button className="bg-gold hover:bg-gold-dark text-accent-foreground font-semibold rounded-full px-10 h-12 text-base">
               Book Now
             </Button>
           </Link>
