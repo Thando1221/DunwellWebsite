@@ -23,7 +23,7 @@ const Footer = () => {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://www.instagram.com/dunwell_clinic/"
+              href="https://www.instagram.com/dunwellyouthpriority/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-gold/20 transition-colors text-primary-foreground hover:text-gold"
