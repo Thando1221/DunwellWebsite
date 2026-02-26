@@ -61,20 +61,7 @@ const AboutSection = () => {
           ))}
         </div>
 
-        {/* Founders Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
-          <span className="text-gold font-medium text-sm uppercase tracking-widest">Leadership</span>
-          <h3 className="text-2xl sm:text-3xl font-heading font-bold mt-2">
-            Meet the Founders
-          </h3>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {founders.map((founder, i) => (
             <motion.div
               key={founder.name}
@@ -82,12 +69,12 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="group relative rounded-2xl overflow-hidden aspect-[3/4] border border-border hover:border-gold/30 hover:shadow-lg transition-all duration-300"
+              className="group relative rounded-2xl overflow-hidden border border-border hover:border-gold/30 hover:shadow-lg transition-all duration-300"
             >
               <img
                 src={founder.image}
                 alt={founder.name}
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <div className="absolute bottom-5 left-5 right-5">
