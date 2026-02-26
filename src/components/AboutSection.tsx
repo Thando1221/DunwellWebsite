@@ -1,11 +1,30 @@
 import { motion } from "framer-motion";
-import { Users, Wallet, MapPin, BadgeCheck } from "lucide-react";
+import { Users, Wallet, MapPin, BadgeCheck, Mail } from "lucide-react";
+import thandoImg from "@/assets/thando-cele.jpg";
+import njabuloImg from "@/assets/nonjabulo-mbuthu.jpg";
 
 const features = [
   { icon: Users, label: "Youth-Focused", desc: "Serving young people" },
   { icon: Wallet, label: "Affordable", desc: "Student-friendly pricing" },
   { icon: MapPin, label: "Accessible", desc: "Braamfontein location" },
   { icon: BadgeCheck, label: "Professional", desc: "Qualified healthcare team" },
+];
+
+const founders = [
+  {
+    name: "Thando Cele",
+    role: "Executive Director & Co-Founder",
+    image: thandoImg,
+    email: "thando@dunwellyouthpriority.co.za",
+    bio: "A qualified Senior Architectural Professional Technologist with extensive experience, including serving as Acting Director in the Gauteng Department of Health Infrastructure. Committed to creating integrated healthcare solutions addressing physical health, substance abuse, and mental health challenges. His goal is to establish 24/7 healthcare centers across South Africa focused on adolescent and youth programs.",
+  },
+  {
+    name: "Nonjabulo Mbuthu",
+    role: "Programme Director & Co-Founder",
+    image: njabuloImg,
+    email: "njabulo@dunwellyouthpriority.co.za",
+    bio: "A qualified Professional Nurse and Substance Abuse Clinical Facilitator with more than 15 years experience working as a nurse mentor and project manager. Creative director of a project aimed to create a preventative and treatment centre contributing to the 2030 NSP goal of zero new infections amongst SA youth.",
+  },
 ];
 
 const AboutSection = () => {
@@ -27,7 +46,7 @@ const AboutSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {features.map((f, i) => (
             <motion.div
               key={f.label}
@@ -42,6 +61,57 @@ const AboutSection = () => {
               </div>
               <h4 className="font-heading font-bold mb-1">{f.label}</h4>
               <p className="text-sm text-muted-foreground">{f.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Founders Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <span className="text-gold font-medium text-sm uppercase tracking-widest">Leadership</span>
+          <h3 className="text-2xl sm:text-3xl font-heading font-bold mt-2">
+            Meet the Founders
+          </h3>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {founders.map((founder, i) => (
+            <motion.div
+              key={founder.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-gold/30 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="relative h-72 overflow-hidden">
+                <img
+                  src={founder.image}
+                  alt={founder.name}
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                <div className="absolute bottom-4 left-6 right-6">
+                  <h4 className="font-heading font-bold text-xl">{founder.name}</h4>
+                  <p className="text-gold text-sm font-medium">{founder.role}</p>
+                </div>
+              </div>
+              <div className="p-6">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                  {founder.bio}
+                </p>
+                <a
+                  href={`mailto:${founder.email}`}
+                  className="inline-flex items-center gap-2 text-gold text-sm font-medium hover:underline"
+                >
+                  <Mail className="w-4 h-4" />
+                  {founder.email}
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>
