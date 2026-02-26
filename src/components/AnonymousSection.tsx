@@ -1,29 +1,53 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Lock, MessageCircleQuestion } from "lucide-react";
+import { Send, Lock, MessageCircleQuestion, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
-const faqItems = [
-  { tag: "Contraception", q: "Can I get contraceptives without my parents knowing?" },
-  { tag: "STI Testing", q: "Do STI tests hurt?" },
-  { tag: "HIV", q: "Is HIV testing free at Dunwell?" },
-  { tag: "Visits", q: "Can I visit the clinic during lunch break?" },
-  { tag: "Privacy", q: "Will the clinic tell my school I visited?" },
-  { tag: "Pricing", q: "How much does a consultation cost for students?" },
+const answeredQuestions = [
+  {
+    category: "Contraception",
+    question: "Can I get contraceptives without my parents knowing?",
+    answer: "Yes! If you're 12 or older, you can access contraceptives confidentially. Our team respects your privacy — no parental consent is required.",
+  },
+  {
+    category: "STI Testing",
+    question: "Do STI tests hurt?",
+    answer: "Most STI tests are quick and painless — usually just a urine sample or a simple swab. Blood tests involve a small prick. Our nurses make the process as comfortable as possible.",
+  },
+  {
+    category: "HIV",
+    question: "Is HIV testing free at Dunwell?",
+    answer: "Yes, HIV testing is free and confidential. We also offer pre- and post-test counselling to support you every step of the way.",
+  },
+  {
+    category: "Visits",
+    question: "Can I visit the clinic during lunch break?",
+    answer: "Absolutely! We understand students have tight schedules. Walk-ins are welcome, and we try to keep wait times short so you can get back to class.",
+  },
+  {
+    category: "Privacy",
+    question: "Will the clinic tell my school I visited?",
+    answer: "No. Your visit is 100% confidential. We do not share any information with your school, parents, or anyone else without your consent.",
+  },
+  {
+    category: "Pricing",
+    question: "How much does a consultation cost for students?",
+    answer: "We offer student-friendly pricing. Consultations start from R150 with a valid student ID. Some services like HIV testing are completely free.",
+  },
 ];
 
 const AnonymousSection = () => {
   const [question, setQuestion] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
 
-    // Store locally
     const existing = JSON.parse(localStorage.getItem("dunwell_anon_questions") || "[]");
     existing.push({ question: question.trim(), date: new Date().toISOString() });
     localStorage.setItem("dunwell_anon_questions", JSON.stringify(existing));
@@ -55,13 +79,61 @@ const AnonymousSection = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Form */}
+          {/* Q&A List */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="bg-card rounded-2xl p-6 border border-border">
+            <h3 className="font-heading font-bold mb-4 flex items-center gap-2">
+              <MessageCircleQuestion className="w-5 h-5 text-gold" />
+              Answered Questions
+            </h3>
+            <div className="space-y-3">
+              {answeredQuestions.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-card rounded-xl border border-border hover:border-gold/30 transition-colors overflow-hidden"
+                >
+                  <button
+                    onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                    className="w-full p-4 text-left flex items-start justify-between gap-3"
+                  >
+                    <div>
+                      <span className="text-xs bg-gold/10 text-gold px-2 py-0.5 rounded-full font-medium">
+                        {item.category}
+                      </span>
+                      <p className="text-sm font-medium mt-1.5">{item.question}</p>
+                    </div>
+                    {expandedIndex === index ? (
+                      <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
+                    )}
+                  </button>
+                  {expandedIndex === index && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="px-4 pb-4"
+                    >
+                      <div className="bg-muted rounded-lg p-3 border-l-2 border-gold">
+                        <p className="text-sm text-muted-foreground leading-relaxed">{item.answer}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Submit Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-card rounded-2xl p-6 border border-border sticky top-24">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
                   <Lock className="w-5 h-5 text-gold" />
@@ -94,30 +166,6 @@ const AnonymousSection = () => {
                   </Button>
                 </div>
               </form>
-            </div>
-          </motion.div>
-
-          {/* FAQ */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="font-heading font-bold mb-4 flex items-center gap-2">
-              <MessageCircleQuestion className="w-5 h-5 text-gold" />
-              Common Questions from Youth
-            </h3>
-            <div className="space-y-3">
-              {faqItems.map((item) => (
-                <div
-                  key={item.tag}
-                  className="bg-card rounded-xl p-4 border border-border hover:border-gold/30 transition-colors cursor-pointer"
-                  onClick={() => setQuestion(item.q)}
-                >
-                  <span className="text-xs bg-gold/10 text-gold px-2 py-0.5 rounded-full font-medium">{item.tag}</span>
-                  <p className="text-sm mt-1.5">{item.q}</p>
-                </div>
-              ))}
             </div>
           </motion.div>
         </div>
