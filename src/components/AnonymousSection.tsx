@@ -18,8 +18,8 @@ const answeredQuestions = [
   },
   {
     category: "HIV",
-    question: "Is HIV testing free at Dunwell?",
-    answer: "Yes, HIV testing is free and confidential. We also offer pre- and post-test counselling to support you every step of the way.",
+    question: "Is HIV testing available at Dunwell?",
+    answer: "Yes, HIV testing is available and confidential. Please refer to our services catalog for pricing details. We also offer pre- and post-test counselling to support you every step of the way.",
   },
   {
     category: "Visits",
@@ -34,7 +34,7 @@ const answeredQuestions = [
   {
     category: "Pricing",
     question: "How much does a consultation cost for students?",
-    answer: "We offer student-friendly pricing. Consultations start from R150 with a valid student ID. Some services like HIV testing are completely free.",
+    answer: "We offer student-friendly pricing. Consultations start from R150 with a valid student ID. Please refer to our services catalog for full pricing details.",
   },
 ];
 
