@@ -59,7 +59,7 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <span className="text-gold font-medium text-sm uppercase tracking-widest">What We Offer</span>
+          <span className="text-turquoise font-medium text-sm uppercase tracking-widest">What We Offer</span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2 mb-4">Our Services</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Comprehensive healthcare services designed specifically for youth, with student-friendly pricing.

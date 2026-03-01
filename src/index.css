@@ -51,6 +51,7 @@
     --gold-dark: 45 90% 45%;
     --grey-light: 220 15% 93%;
     --grey-mid: 220 10% 75%;
+    --turquoise: 174 60% 45%;
   }
 
   .dark {
@@ -88,6 +89,7 @@
     --gold-dark: 45 90% 45%;
     --grey-light: 220 25% 18%;
     --grey-mid: 220 15% 40%;
+    --turquoise: 174 60% 50%;
   }
 }
 
