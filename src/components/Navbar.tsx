@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
+import clinicLogo from "@/assets/clinic-logo.ico";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -20,9 +20,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <a href="#home" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
-            <span className="font-heading font-bold text-accent-foreground text-sm">DW</span>
-          </div>
+          <img src={clinicLogo} alt="Dunwell Logo" className="w-10 h-10 rounded-full object-contain" />
           <div className="hidden sm:block">
             <p className="font-heading font-bold text-foreground leading-tight">DUNWELL</p>
             <p className="text-[10px] tracking-[0.2em] text-muted-foreground uppercase">Youth Priority Clinic</p>
