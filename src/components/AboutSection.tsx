@@ -36,7 +36,7 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="text-gold font-medium text-sm uppercase tracking-widest">About Us</span>
+          <span className="text-turquoise font-medium text-sm uppercase tracking-widest">About Us</span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2 mb-4">
             Empowering Youth Through Quality Healthcare
           </h2>
@@ -71,7 +71,7 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <span className="text-gold font-medium text-sm uppercase tracking-widest">Leadership</span>
+          <span className="text-turquoise font-medium text-sm uppercase tracking-widest">Leadership</span>
           <h3 className="text-2xl sm:text-3xl font-heading font-bold mt-2">
             Meet the Founders
           </h3>

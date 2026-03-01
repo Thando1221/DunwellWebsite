@@ -23,7 +23,7 @@ const CampaignsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <span className="text-gold font-medium text-sm uppercase tracking-widest">Special Offers</span>
+          <span className="text-turquoise font-medium text-sm uppercase tracking-widest">Special Offers</span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2 mb-4 text-primary-foreground">
             Student Discount
           </h2>

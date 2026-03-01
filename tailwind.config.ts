@@ -61,6 +61,7 @@ export default {
         },
         "grey-light": "hsl(var(--grey-light))",
         "grey-mid": "hsl(var(--grey-mid))",
+        turquoise: "hsl(var(--turquoise))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
