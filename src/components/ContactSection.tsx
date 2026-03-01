@@ -30,7 +30,7 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="text-turquoise font-medium text-sm uppercase tracking-widest">Get In Touch</span>
+          <span className="text-turquoise font-semibold text-base uppercase tracking-widest">Get In Touch</span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2">Visit Our Clinic</h2>
         </motion.div>
 

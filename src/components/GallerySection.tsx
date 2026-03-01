@@ -21,7 +21,7 @@ const GallerySection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="text-turquoise font-medium text-sm uppercase tracking-widest">Our Clinic</span>
+          <span className="text-turquoise font-semibold text-base uppercase tracking-widest">Our Clinic</span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold mt-2">See Us in Action</h2>
         </motion.div>
 
