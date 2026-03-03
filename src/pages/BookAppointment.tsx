@@ -144,7 +144,7 @@ _38 De Beer Street, Braamfontein_
 _www.dunwellyouthpriority.co.za_`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/27813636400?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/27721760247?text=${encodedMessage}`;
 
     // Store locally as backup
     const bookings = JSON.parse(localStorage.getItem("dunwell_bookings") || "[]");
