@@ -6,15 +6,15 @@ import clinicConsultation from "@/assets/clinic-consultation.jpeg";
 
 const HeroSection = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="home" className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
         <img
           src={clinicConsultation}
           alt="Dunwell Youth Priority Clinic consultation"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center sm:object-[center_20%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-navy/95 via-navy/85 to-navy/50 sm:to-navy/40" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 pt-24">
