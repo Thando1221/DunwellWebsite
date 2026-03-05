@@ -12,9 +12,9 @@ const HeroSection = () => {
         <img
           src={clinicConsultation}
           alt="Dunwell Youth Priority Clinic consultation"
-          className="w-full h-full object-cover object-center sm:object-[center_20%]"
+          className="w-full h-full object-cover object-[70%_center] sm:object-[center_20%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-navy/95 via-navy/85 to-navy/50 sm:to-navy/40" />
+        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-navy/95 via-navy/85 to-navy/60 sm:to-navy/40" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 pt-24">
