@@ -168,111 +168,187 @@ const CampaignsSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
-            onClick={() => setTbModalOpen(false)}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
+            onClick={() => { if (introComplete) setTbModalOpen(false); }}
           >
-            {/* Close button */}
-            <motion.button
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ delay: 0.3 }}
-              onClick={() => setTbModalOpen(false)}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full p-3 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </motion.button>
-
-            {/* Content */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0, rotateX: 15 }}
-              animate={{ scale: 1, opacity: 1, rotateX: 0 }}
-              exit={{ scale: 0.8, opacity: 0, rotateX: -15 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full h-full sm:w-[90vw] sm:h-[90vh] sm:max-w-5xl sm:rounded-2xl overflow-hidden relative flex flex-col"
-            >
-              {/* Scrollable content */}
-              <div className="flex-1 overflow-y-auto bg-gradient-to-b from-sky-900 via-sky-800 to-sky-900">
-                {/* Hero image */}
-                <motion.div
-                  initial={{ y: -30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="relative"
+            {/* Close button - only after intro */}
+            <AnimatePresence>
+              {introComplete && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  onClick={() => setTbModalOpen(false)}
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full p-3 transition-colors"
                 >
-                  <img
-                    src={campaignTb}
-                    alt="World TB Awareness"
-                    className="w-full h-auto max-h-[50vh] object-contain"
-                  />
-                </motion.div>
+                  <X className="w-6 h-6" />
+                </motion.button>
+              )}
+            </AnimatePresence>
 
-                {/* Info cards */}
-                <div className="px-4 sm:px-8 py-6 space-y-6">
-                  <motion.h2
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-2xl sm:text-3xl font-heading font-bold text-white text-center"
-                  >
-                    What is Tuberculosis (TB)?
-                  </motion.h2>
+            {/* 3-second cinematic intro */}
+            <AnimatePresence>
+              {!introComplete && (
+                <motion.div
+                  exit={{ opacity: 0, scale: 1.2 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center"
+                >
+                  {/* Radial pulse rings */}
+                  {[0, 0.4, 0.8].map((delay, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ scale: 0, opacity: 0.6 }}
+                      animate={{ scale: 3, opacity: 0 }}
+                      transition={{ duration: 2.5, delay, repeat: Infinity, ease: "easeOut" }}
+                      className="absolute w-32 h-32 rounded-full border-2 border-red-500/40"
+                    />
+                  ))}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {[
-                      { title: "Symptoms", items: tbInfo.symptoms, color: "from-green-600 to-green-800", emoji: "🫁" },
-                      { title: "How It Spreads", items: tbInfo.spreads, color: "from-blue-500 to-blue-700", emoji: "💨" },
-                      { title: "Prevention", items: tbInfo.prevention, color: "from-amber-500 to-amber-700", emoji: "🛡️" },
-                    ].map((card, i) => (
-                      <motion.div
-                        key={card.title}
-                        initial={{ y: 40, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.4 + i * 0.1, type: "spring", damping: 20 }}
-                        className={`rounded-xl bg-gradient-to-b ${card.color} p-5 text-white shadow-xl`}
-                      >
-                        <h3 className="font-heading font-bold text-lg mb-3 flex items-center gap-2">
-                          <span className="text-xl">{card.emoji}</span> {card.title}
-                        </h3>
-                        <ul className="space-y-2">
-                          {card.items.map((item) => (
-                            <li key={item} className="flex items-center gap-2 text-sm text-white/90">
-                              <span className="w-1.5 h-1.5 rounded-full bg-white/70 shrink-0" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
+                  {/* Lungs icon pulse */}
                   <motion.div
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.7 }}
-                    className="bg-white/10 backdrop-blur-md rounded-xl p-6 text-center space-y-4"
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ duration: 0.8, type: "spring", damping: 12 }}
+                    className="text-7xl sm:text-8xl mb-6 relative z-10"
                   >
-                    <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
-                      Get Tested & Stay Safe!
-                    </h3>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/80 text-sm">
-                      <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> 38 De Beer St, Braamfontein</span>
-                      <span className="hidden sm:block">•</span>
-                      <span className="flex items-center gap-1.5"><MessageCircle className="w-4 h-4" /> 072 176 0247</span>
-                    </div>
-                    <Link to="/book" onClick={() => setTbModalOpen(false)}>
-                      <Button className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-2 px-8 py-3 text-base font-bold mt-2">
-                        <Phone className="w-5 h-5" />
-                        Book Now
-                      </Button>
-                    </Link>
+                    🫁
                   </motion.div>
-                </div>
-              </div>
-            </motion.div>
+
+                  {/* "WORLD TB DAY" text reveal */}
+                  <motion.div className="overflow-hidden relative z-10">
+                    <motion.h2
+                      initial={{ y: 80 }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-4xl sm:text-6xl md:text-7xl font-heading font-bold text-white tracking-tight text-center"
+                    >
+                      WORLD TB DAY
+                    </motion.h2>
+                  </motion.div>
+
+                  {/* Subtitle */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2, duration: 0.6 }}
+                    className="text-gold font-heading font-bold text-lg sm:text-xl tracking-[0.3em] uppercase mt-4"
+                  >
+                    Learn. Protect. Prevent.
+                  </motion.p>
+
+                  {/* Red ribbon accent */}
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 1.8, duration: 0.8, ease: "easeInOut" }}
+                    className="w-48 sm:w-64 h-1 bg-gradient-to-r from-transparent via-destructive to-transparent mt-6 origin-center"
+                  />
+
+                  {/* March 24 badge */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 2.2, type: "spring", damping: 15 }}
+                    className="mt-6 bg-white/10 backdrop-blur-sm rounded-full px-6 py-2 border border-white/20"
+                  >
+                    <span className="text-white/90 font-heading text-sm sm:text-base">
+                      <Calendar className="w-4 h-4 inline mr-2" />
+                      March 24, 2026
+                    </span>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Fullscreen image + content after intro */}
+            <AnimatePresence>
+              {introComplete && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full h-full overflow-y-auto"
+                >
+                  {/* Full image */}
+                  <div className="min-h-screen flex flex-col items-center justify-start bg-black">
+                    <motion.img
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      src={campaignTb}
+                      alt="World TB Awareness"
+                      className="w-full max-w-4xl h-auto mx-auto"
+                    />
+
+                    {/* Info below image */}
+                    <div className="w-full max-w-4xl px-4 sm:px-8 py-8 space-y-6">
+                      <motion.h2
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-2xl sm:text-3xl font-heading font-bold text-white text-center"
+                      >
+                        What is Tuberculosis (TB)?
+                      </motion.h2>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {[
+                          { title: "Symptoms", items: tbInfo.symptoms, color: "from-green-600 to-green-800", emoji: "🫁" },
+                          { title: "How It Spreads", items: tbInfo.spreads, color: "from-blue-500 to-blue-700", emoji: "💨" },
+                          { title: "Prevention", items: tbInfo.prevention, color: "from-amber-500 to-amber-700", emoji: "🛡️" },
+                        ].map((card, i) => (
+                          <motion.div
+                            key={card.title}
+                            initial={{ y: 40, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.3 + i * 0.1, type: "spring", damping: 20 }}
+                            className={`rounded-xl bg-gradient-to-b ${card.color} p-5 text-white shadow-xl`}
+                          >
+                            <h3 className="font-heading font-bold text-lg mb-3 flex items-center gap-2">
+                              <span className="text-xl">{card.emoji}</span> {card.title}
+                            </h3>
+                            <ul className="space-y-2">
+                              {card.items.map((item) => (
+                                <li key={item} className="flex items-center gap-2 text-sm text-white/90">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-white/70 shrink-0" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* CTA */}
+                      <motion.div
+                        initial={{ y: 30, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="bg-white/10 backdrop-blur-md rounded-xl p-6 text-center space-y-4"
+                      >
+                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
+                          Get Tested & Stay Safe!
+                        </h3>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/80 text-sm">
+                          <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> 38 De Beer St, Braamfontein</span>
+                          <span className="hidden sm:block">•</span>
+                          <span className="flex items-center gap-1.5"><MessageCircle className="w-4 h-4" /> 072 176 0247</span>
+                        </div>
+                        <Link to="/book" onClick={() => setTbModalOpen(false)}>
+                          <Button className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-2 px-8 py-3 text-base font-bold mt-2">
+                            <Phone className="w-5 h-5" />
+                            Book Now
+                          </Button>
+                        </Link>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
