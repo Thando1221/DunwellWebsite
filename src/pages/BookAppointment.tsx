@@ -1,5 +1,5 @@
-import { useState, useMemo, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect, FormEvent } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Card,
