@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, Phone, X, MapPin, Globe, MessageCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
