@@ -28,7 +28,7 @@ const CampaignsSection = () => {
   useEffect(() => {
     if (tbModalOpen) {
       setIntroComplete(false);
-      const timer = setTimeout(() => setIntroComplete(true), 3000);
+      const timer = setTimeout(() => setIntroComplete(true), 5000);
       return () => clearTimeout(timer);
     }
   }, [tbModalOpen]);
