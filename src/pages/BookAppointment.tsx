@@ -1,5 +1,5 @@
-import { useState, useMemo, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect, FormEvent } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -47,6 +47,7 @@ const services = [
 
 const BookAppointment = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [firstName, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
@@ -67,6 +68,15 @@ const BookAppointment = () => {
   const [mainMemberIdNo, setMainMemberIdNo] = useState("");
 
   const selectedServiceData = services.find((s) => s.name === selectedService);
+
+  // Pre-select service from URL params
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      const match = services.find((s) => s.name === serviceParam);
+      if (match) setSelectedService(match.name);
+    }
+  }, [searchParams]);
 
   const finalPrice = useMemo(() => {
     if (!selectedServiceData) return 0;
