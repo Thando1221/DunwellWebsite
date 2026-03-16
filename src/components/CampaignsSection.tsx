@@ -23,6 +23,15 @@ const tbInfo = {
 
 const CampaignsSection = () => {
   const [tbModalOpen, setTbModalOpen] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
+
+  useEffect(() => {
+    if (tbModalOpen) {
+      setIntroComplete(false);
+      const timer = setTimeout(() => setIntroComplete(true), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [tbModalOpen]);
 
   return (
     <>
