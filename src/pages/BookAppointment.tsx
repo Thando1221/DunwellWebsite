@@ -47,6 +47,7 @@ const services = [
 
 const BookAppointment = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [firstName, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
