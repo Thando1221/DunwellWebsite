@@ -260,7 +260,7 @@ const CampaignsSection = () => {
                         Book Now
                       </Button>
                     </Link>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
