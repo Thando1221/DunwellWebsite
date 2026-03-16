@@ -337,7 +337,7 @@ const CampaignsSection = () => {
                           <span className="hidden sm:block">•</span>
                           <span className="flex items-center gap-1.5"><MessageCircle className="w-4 h-4" /> 072 176 0247</span>
                         </div>
-                        <Link to="/book" onClick={() => setTbModalOpen(false)}>
+                        <Link to="/book?service=Consultation%20(incl%20meds)" onClick={() => setTbModalOpen(false)}>
                           <Button className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-2 px-8 py-3 text-base font-bold mt-2">
                             <Phone className="w-5 h-5" />
                             Book Now
