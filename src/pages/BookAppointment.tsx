@@ -69,6 +69,15 @@ const BookAppointment = () => {
 
   const selectedServiceData = services.find((s) => s.name === selectedService);
 
+  // Pre-select service from URL params
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      const match = services.find((s) => s.name === serviceParam);
+      if (match) setSelectedService(match.name);
+    }
+  }, [searchParams]);
+
   const finalPrice = useMemo(() => {
     if (!selectedServiceData) return 0;
     if (isStudent && selectedServiceData.discount !== null) {
