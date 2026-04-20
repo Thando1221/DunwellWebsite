@@ -34,7 +34,6 @@ const currentServices = [
       { name: "STI Treatment", price: "R350" },
       { name: "HIV Care", price: "R300" },
       { name: "Chronic Illness", price: "R300" },
-      { name: "Skin Care from", price: "R300" },
       { name: "Wound Care from", price: "R300" },
       { name: "Stitch Removal", price: "R300" },
     ],
