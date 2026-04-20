@@ -106,17 +106,7 @@ const CampaignsSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Monthly Awareness - World TB Day */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto mb-12"
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <Calendar className="w-5 h-5 text-gold" />
-              <span className="text-gold font-heading font-bold text-sm uppercase tracking-widest">March — Past Awareness</span>
-            </div>
+          {/* Monthly Awareness - World TB Day (March) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
