@@ -63,7 +63,60 @@ const CampaignsSection = () => {
             </p>
           </motion.div>
 
+          {/* Monthly Awareness - April SRH */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-12"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Calendar className="w-5 h-5 text-gold" />
+              <span className="text-gold font-heading font-bold text-sm uppercase tracking-widest">April — Monthly Awareness</span>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSrhModalOpen(true)}
+              className="relative rounded-2xl overflow-hidden border border-border cursor-pointer group shadow-lg shadow-black/20"
+            >
+              <div className="relative h-64 sm:h-80 overflow-hidden">
+                <img
+                  src={campaignSrh}
+                  alt="April is Sexual & Reproductive Health Awareness Month"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <span className="bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      SRH Awareness
+                    </span>
+                    <span className="bg-gold text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">
+                      April 2026
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
+                    Sexual & Reproductive Health Awareness Month
+                  </h3>
+                  <p className="text-white/70 text-sm mt-1">Tap to learn more — Your Health, Your Future</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
           {/* Monthly Awareness - World TB Day */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-12"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Calendar className="w-5 h-5 text-gold" />
+              <span className="text-gold font-heading font-bold text-sm uppercase tracking-widest">March — Past Awareness</span>
+            </div>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
