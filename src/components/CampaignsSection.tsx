@@ -25,6 +25,8 @@ const tbInfo = {
 const CampaignsSection = () => {
   const [tbModalOpen, setTbModalOpen] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [srhModalOpen, setSrhModalOpen] = useState(false);
+  const [srhIntroComplete, setSrhIntroComplete] = useState(false);
 
   useEffect(() => {
     if (tbModalOpen) {
@@ -33,6 +35,14 @@ const CampaignsSection = () => {
       return () => clearTimeout(timer);
     }
   }, [tbModalOpen]);
+
+  useEffect(() => {
+    if (srhModalOpen) {
+      setSrhIntroComplete(false);
+      const timer = setTimeout(() => setSrhIntroComplete(true), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [srhModalOpen]);
 
   return (
     <>
