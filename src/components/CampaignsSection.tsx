@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, Phone, X, MapPin, Globe, MessageCircle, Calendar } from "lucide-react";
+import { GraduationCap, Phone, X, MapPin, Globe, MessageCircle, Calendar, Heart, Shield, Sparkles, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import campaignStudent from "@/assets/campaign-student-discount.jpg";
 import campaignTb from "@/assets/campaign-tb-awareness.png";
+import campaignSrh from "@/assets/campaign-srh-april.png";
 
 const studentServices = [
   { name: "Consultation (incl meds)", normal: "R250", student: "R50" },
@@ -24,6 +25,8 @@ const tbInfo = {
 const CampaignsSection = () => {
   const [tbModalOpen, setTbModalOpen] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [srhModalOpen, setSrhModalOpen] = useState(false);
+  const [srhIntroComplete, setSrhIntroComplete] = useState(false);
 
   useEffect(() => {
     if (tbModalOpen) {
@@ -32,6 +35,14 @@ const CampaignsSection = () => {
       return () => clearTimeout(timer);
     }
   }, [tbModalOpen]);
+
+  useEffect(() => {
+    if (srhModalOpen) {
+      setSrhIntroComplete(false);
+      const timer = setTimeout(() => setSrhIntroComplete(true), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [srhModalOpen]);
 
   return (
     <>
@@ -52,7 +63,50 @@ const CampaignsSection = () => {
             </p>
           </motion.div>
 
-          {/* Monthly Awareness - World TB Day */}
+          {/* Monthly Awareness - April SRH */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-12"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Calendar className="w-5 h-5 text-gold" />
+              <span className="text-gold font-heading font-bold text-sm uppercase tracking-widest">April — Monthly Awareness</span>
+            </div>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSrhModalOpen(true)}
+              className="relative rounded-2xl overflow-hidden border border-border cursor-pointer group shadow-lg shadow-black/20"
+            >
+              <div className="relative h-64 sm:h-80 overflow-hidden">
+                <img
+                  src={campaignSrh}
+                  alt="April is Sexual & Reproductive Health Awareness Month"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <span className="bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      SRH Awareness
+                    </span>
+                    <span className="bg-gold text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">
+                      April 2026
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
+                    Sexual & Reproductive Health Awareness Month
+                  </h3>
+                  <p className="text-white/70 text-sm mt-1">Tap to learn more — Your Health, Your Future</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Monthly Awareness - World TB Day (March) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -341,6 +395,253 @@ const CampaignsSection = () => {
                           <Button className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-2 px-8 py-3 text-base font-bold mt-2">
                             <Phone className="w-5 h-5" />
                             Book Now
+                          </Button>
+                        </Link>
+                      </motion.div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Fullscreen SRH Awareness Modal */}
+      <AnimatePresence>
+        {srhModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
+            style={{ background: "linear-gradient(135deg, #6b21a8 0%, #be185d 50%, #f97316 100%)" }}
+            onClick={() => { if (srhIntroComplete) setSrhModalOpen(false); }}
+          >
+            {/* Floating decorative orbs */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              {[...Array(12)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{
+                    opacity: [0.3, 0.6, 0.3],
+                    scale: [1, 1.4, 1],
+                    y: [0, -30, 0],
+                  }}
+                  transition={{
+                    duration: 4 + i * 0.3,
+                    repeat: Infinity,
+                    delay: i * 0.2,
+                  }}
+                  className="absolute w-32 h-32 rounded-full blur-3xl"
+                  style={{
+                    background: i % 2 ? "rgba(255,182,193,0.4)" : "rgba(254,215,170,0.4)",
+                    left: `${(i * 13) % 100}%`,
+                    top: `${(i * 17) % 100}%`,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Close button */}
+            <AnimatePresence>
+              {srhIntroComplete && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  onClick={() => setSrhModalOpen(false)}
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white rounded-full p-3 transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </motion.button>
+              )}
+            </AnimatePresence>
+
+            {/* Cinematic intro */}
+            <AnimatePresence>
+              {!srhIntroComplete && (
+                <motion.div
+                  exit={{ opacity: 0, scale: 1.2 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4"
+                >
+                  {/* Floating hearts */}
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ y: 100, opacity: 0, x: (i - 3) * 60 }}
+                      animate={{
+                        y: [-20, -200],
+                        opacity: [0, 1, 0],
+                        rotate: [0, 360],
+                      }}
+                      transition={{
+                        duration: 3,
+                        delay: i * 0.3,
+                        repeat: Infinity,
+                      }}
+                      className="absolute"
+                    >
+                      <Heart className="w-8 h-8 text-pink-300 fill-pink-400" />
+                    </motion.div>
+                  ))}
+
+                  {/* "April is" script */}
+                  <motion.div
+                    initial={{ opacity: 0, y: -30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-gold font-heading italic text-2xl sm:text-3xl mb-2 relative z-10"
+                  >
+                    — April is —
+                  </motion.div>
+
+                  {/* Main title reveal */}
+                  <motion.div className="overflow-hidden relative z-10 text-center">
+                    <motion.h2
+                      initial={{ y: 100 }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-tight"
+                    >
+                      SEXUAL & REPRODUCTIVE
+                    </motion.h2>
+                  </motion.div>
+                  <motion.div className="overflow-hidden relative z-10 text-center">
+                    <motion.h2
+                      initial={{ y: 100 }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-3xl sm:text-5xl md:text-7xl font-heading font-bold text-white tracking-tight leading-tight"
+                    >
+                      HEALTH AWARENESS
+                    </motion.h2>
+                  </motion.div>
+
+                  {/* MONTH! highlight */}
+                  <motion.div
+                    initial={{ scale: 0, rotate: -10 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 1.3, type: "spring", damping: 10 }}
+                    className="mt-4 bg-gold text-purple-900 font-heading font-bold text-2xl sm:text-4xl px-8 py-2 rounded-2xl shadow-2xl relative z-10"
+                  >
+                    MONTH!
+                  </motion.div>
+
+                  {/* Subtitle */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 2, duration: 0.6 }}
+                    className="text-white font-heading italic text-lg sm:text-xl mt-6 relative z-10"
+                  >
+                    Your Health, Your Future
+                  </motion.p>
+
+                  {/* Pulse ribbon */}
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 2.4, duration: 0.8, ease: "easeInOut" }}
+                    className="w-48 sm:w-64 h-1 bg-gradient-to-r from-transparent via-white to-transparent mt-6 origin-center"
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Fullscreen image + content after intro */}
+            <AnimatePresence>
+              {srhIntroComplete && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full h-full overflow-y-auto relative z-10"
+                >
+                  <div className="min-h-screen flex flex-col items-center justify-start">
+                    <motion.img
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6 }}
+                      src={campaignSrh}
+                      alt="April Sexual & Reproductive Health Awareness"
+                      className="w-full max-w-3xl h-auto mx-auto rounded-b-3xl shadow-2xl"
+                    />
+
+                    <div className="w-full max-w-4xl px-4 sm:px-8 py-8 space-y-6">
+                      <motion.h2
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-2xl sm:text-3xl font-heading font-bold text-white text-center"
+                      >
+                        What This Month Is About
+                      </motion.h2>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {[
+                          { title: "Safe Sex Education", desc: "Knowledge to protect yourself and your partner.", icon: Shield, color: "from-pink-500 to-rose-600" },
+                          { title: "HIV & STI Testing", desc: "Free, fast, confidential testing available.", icon: FlaskConical, color: "from-purple-500 to-fuchsia-600" },
+                          { title: "Access to Contraceptives", desc: "Pills, injections, implants — your choice.", icon: Sparkles, color: "from-orange-500 to-amber-600" },
+                          { title: "Reproductive Health Services", desc: "Pap smears, family planning & more.", icon: Heart, color: "from-rose-500 to-pink-600" },
+                        ].map((card, i) => (
+                          <motion.div
+                            key={card.title}
+                            initial={{ y: 40, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.3 + i * 0.1, type: "spring", damping: 20 }}
+                            className={`rounded-xl bg-gradient-to-br ${card.color} p-5 text-white shadow-xl`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <div className="bg-white/20 backdrop-blur rounded-lg p-2 shrink-0">
+                                <card.icon className="w-5 h-5" />
+                              </div>
+                              <div>
+                                <h3 className="font-heading font-bold text-base mb-1">{card.title}</h3>
+                                <p className="text-sm text-white/90">{card.desc}</p>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Key Dates */}
+                      <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.7 }}
+                        className="bg-white/10 backdrop-blur-md rounded-xl p-5 space-y-2"
+                      >
+                        <h3 className="font-heading font-bold text-white text-lg mb-2 flex items-center gap-2">
+                          <Calendar className="w-5 h-5 text-gold" /> Key Dates in April
+                        </h3>
+                        <p className="text-white/90 text-sm flex items-center gap-2">🌍 <strong>World Health Day</strong> — April 7</p>
+                        <p className="text-white/90 text-sm flex items-center gap-2">💉 <strong>World Immunization Week</strong> — Last week of April</p>
+                      </motion.div>
+
+                      {/* CTA */}
+                      <motion.div
+                        initial={{ y: 30, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.9 }}
+                        className="bg-white/15 backdrop-blur-md rounded-xl p-6 text-center space-y-4 border border-white/20"
+                      >
+                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-white">
+                          Take Charge of Your Health Today
+                        </h3>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/90 text-sm">
+                          <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> 38 De Beer St, Braamfontein</span>
+                          <span className="hidden sm:block">•</span>
+                          <span className="flex items-center gap-1.5"><MessageCircle className="w-4 h-4" /> 072 176 0247</span>
+                        </div>
+                        <Link to="/book?service=Consultation%20(incl%20meds)" onClick={() => setSrhModalOpen(false)}>
+                          <Button className="bg-gold hover:bg-gold-dark text-accent-foreground rounded-full gap-2 px-8 py-3 text-base font-bold mt-2">
+                            <Phone className="w-5 h-5" />
+                            Book Confidential Visit
                           </Button>
                         </Link>
                       </motion.div>
