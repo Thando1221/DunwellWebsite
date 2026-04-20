@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GraduationCap, Phone, X, MapPin, Globe, MessageCircle, Calendar } from "lucide-react";
+import { GraduationCap, Phone, X, MapPin, Globe, MessageCircle, Calendar, Heart, Shield, Sparkles, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import campaignStudent from "@/assets/campaign-student-discount.jpg";
 import campaignTb from "@/assets/campaign-tb-awareness.png";
+import campaignSrh from "@/assets/campaign-srh-april.png";
 
 const studentServices = [
   { name: "Consultation (incl meds)", normal: "R250", student: "R50" },
