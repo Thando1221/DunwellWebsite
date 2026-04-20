@@ -24,25 +24,34 @@ import { toast } from "sonner";
 import { ArrowLeft, CalendarCheck, GraduationCap, MessageCircle } from "lucide-react";
 
 const services = [
-  { id: 1, name: "Consultation (incl meds)", price: 250, discount: 50 },
-  { id: 2, name: "Family Planning", price: 150, discount: 50 },
-  { id: 3, name: "Implanon Insertion", price: 300, discount: 50 },
-  { id: 4, name: "Implanon Removal", price: 350, discount: 50 },
-  { id: 5, name: "Pregnancy Test", price: 50, discount: 50 },
-  { id: 6, name: "HIV Testing", price: 100, discount: 50 },
-  { id: 7, name: "HIV PrEP/PEP", price: 350, discount: 50 },
-  { id: 8, name: "HIV Care (Excl labs)", price: 350, discount: 50 },
-  { id: 9, name: "Chronic Illness", price: 300, discount: 50 },
-  { id: 10, name: "STI Management", price: 300, discount: 50 },
-  { id: 11, name: "Acne Care", price: 250, discount: 50 },
-  { id: 12, name: "Papsmear / PSA", price: 250, discount: 50 },
-  { id: 13, name: "BP / HGT Check", price: 50, discount: 50 },
-  { id: 14, name: "Vita Shots (Bco/C/B12/Magnesium)", price: 50, discount: null },
-  { id: 15, name: "Glutathione Shot", price: 200, discount: null },
-  { id: 16, name: "Glow Drip", price: 500, discount: null },
-  { id: 17, name: "Recovery Drip", price: 400, discount: null },
-  { id: 18, name: "Energy Drip", price: 300, discount: null },
-  { id: 19, name: "Hangover Drip", price: 350, discount: null },
+  // Prevention
+  { id: 1, name: "Family Planning", price: 150, discount: 50 },
+  { id: 2, name: "Implanon Insertion", price: 300, discount: 50 },
+  { id: 3, name: "Implanon Removal", price: 350, discount: 50 },
+  { id: 4, name: "HIV PrEP", price: 350, discount: 50 },
+  { id: 5, name: "HIV PEP", price: 350, discount: 50 },
+  { id: 6, name: "Emergency Pills", price: 150, discount: 50 },
+  { id: 7, name: "Papsmear", price: 300, discount: 50 },
+  { id: 8, name: "Prostate", price: 300, discount: 50 },
+  // Clinical
+  { id: 9, name: "Consultation (incl meds)", price: 250, discount: 50 },
+  { id: 10, name: "STI Treatment", price: 350, discount: 50 },
+  { id: 11, name: "HIV Care", price: 300, discount: 50 },
+  { id: 12, name: "Chronic Illness", price: 300, discount: 50 },
+  { id: 13, name: "Skin Care", price: 300, discount: 50 },
+  { id: 14, name: "Wound Care", price: 300, discount: 50 },
+  { id: 15, name: "Stitch Removal", price: 300, discount: 50 },
+  // Wellness
+  { id: 16, name: "Pregnancy Test", price: 50, discount: null },
+  { id: 17, name: "BP / Glucose Test", price: 50, discount: null },
+  { id: 18, name: "HIV Test", price: 100, discount: null },
+  { id: 19, name: "Vita Shots (Bco/C/B12)", price: 50, discount: null },
+  { id: 20, name: "Glutathione Shot", price: 200, discount: null },
+  { id: 21, name: "Acne Care", price: 300, discount: null },
+  { id: 22, name: "Detox Drip", price: 600, discount: null },
+  { id: 23, name: "Glow Drip", price: 500, discount: null },
+  { id: 24, name: "Recovery Drip", price: 400, discount: null },
+  { id: 25, name: "Energy Drip", price: 450, discount: null },
 ];
 
 const BookAppointment = () => {
