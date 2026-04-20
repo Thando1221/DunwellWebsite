@@ -1,27 +1,41 @@
 import { motion } from "framer-motion";
-import { Stethoscope, Sparkles, CalendarCheck, GraduationCap } from "lucide-react";
+import { Stethoscope, Sparkles, ShieldCheck, CalendarCheck, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    icon: Stethoscope,
-    title: "Clinical Services",
-    subtitle: "Professional medical consultations & treatment",
+    icon: ShieldCheck,
+    title: "Prevention",
+    subtitle: "Proactive care to keep you healthy",
     items: [
-      { name: "Consultation (incl meds)", price: "R250" },
       { name: "Family Planning", price: "R150" },
       { name: "Implanon Insertion", price: "R300" },
       { name: "Implanon Removal", price: "R350" },
-      { name: "Pregnancy Test", price: "R50" },
-      { name: "HIV Testing", price: "R100" },
-      { name: "HIV PrEP/PEP", price: "R350" },
-      { name: "HIV Care (Excl labs)", price: "R350" },
+      { name: "HIV PrEP", price: "R350" },
+      { name: "HIV PEP", price: "R350" },
+      { name: "Emergency Pills", price: "R150" },
+      { name: "Papsmear", price: "R300" },
+      { name: "Prostate", price: "R300" },
+    ],
+    badge: "R50 Student Discount",
+    badgeIcon: GraduationCap,
+    gradient: "from-emerald-500/10 to-emerald-600/5",
+    iconBg: "bg-emerald-500/10",
+    iconColor: "text-emerald-500",
+  },
+  {
+    icon: Stethoscope,
+    title: "Clinical",
+    subtitle: "Consultations & treatment (incl. meds, excl. lab tests)",
+    items: [
+      { name: "Consultation", price: "R250" },
+      { name: "STI Treatment", price: "R350" },
+      { name: "HIV Care", price: "R300" },
       { name: "Chronic Illness", price: "R300" },
-      { name: "STI Management", price: "R300" },
-      { name: "Acne Care", price: "R250" },
-      { name: "Papsmear / PSA", price: "R250" },
-      { name: "BP / HGT Check", price: "R50" },
+      { name: "Skin Care from", price: "R300" },
+      { name: "Wound Care from", price: "R300" },
+      { name: "Stitch Removal", price: "R300" },
     ],
     badge: "R50 Student Discount",
     badgeIcon: GraduationCap,
@@ -31,15 +45,19 @@ const services = [
   },
   {
     icon: Sparkles,
-    title: "Wellness Services",
+    title: "Wellness",
     subtitle: "Boost your health with premium wellness treatments",
     items: [
-      { name: "Vita Shots (Bco/C/B12/Magnesium)", price: "R50" },
-      { name: "Glutathione Shot", price: "R200" },
+      { name: "Pregnancy Test", price: "R50" },
+      { name: "BP / Glucose Test", price: "R50" },
+      { name: "HIV Test", price: "R100" },
+      { name: "Vit Bco / B12 / C", price: "R50" },
+      { name: "Glutathione", price: "R200" },
+      { name: "Acne Care", price: "R300" },
+      { name: "Detox Drip", price: "R600" },
       { name: "Glow Drip", price: "R500" },
       { name: "Recovery Drip", price: "R400" },
-      { name: "Energy Drip", price: "R300" },
-      { name: "Hangover Drip", price: "R350" },
+      { name: "Energy Drip", price: "R450" },
     ],
     badge: null,
     badgeIcon: null,
@@ -66,7 +84,7 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
