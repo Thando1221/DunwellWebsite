@@ -4,60 +4,7 @@ import { Stethoscope, Sparkles, ShieldCheck, Brain, CalendarCheck, GraduationCap
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-const currentServices = [
-  {
-    icon: ShieldCheck,
-    title: "Prevention",
-    subtitle: "Proactive care to keep you healthy",
-    items: [
-      { name: "Family Planning", price: "R150" },
-      { name: "Implanon Insertion", price: "R300" },
-      { name: "Implanon Removal", price: "R350" },
-      { name: "HIV PrEP", price: "R350" },
-      { name: "HIV PEP", price: "R350" },
-      { name: "Emergency Pills", price: "R150" },
-      { name: "Papsmear", price: "R300" },
-      { name: "Prostate", price: "R300" },
-    ],
-    badge: "R50 Student Discount",
-    accent: "emerald",
-  },
-  {
-    icon: Stethoscope,
-    title: "Clinical",
-    subtitle: "Consultations & treatment (incl. meds, excl. lab tests)",
-    items: [
-      { name: "Consultation", price: "R250" },
-      { name: "STI Treatment", price: "R350" },
-      { name: "HIV Care", price: "R300" },
-      { name: "Chronic Illness", price: "R300" },
-      { name: "Stitch Removal", price: "R300" },
-    ],
-    badge: "R50 Student Discount",
-    accent: "blue",
-  },
-  {
-    icon: Sparkles,
-    title: "Wellness",
-    subtitle: "Boost your health with premium wellness treatments",
-    items: [
-      { name: "Pregnancy Test", price: "R50" },
-      { name: "BP / Glucose Test", price: "R50" },
-      { name: "HIV Test", price: "R100" },
-      { name: "Vit Bco / B12 / C", price: "R50" },
-      { name: "Glutathione", price: "R200" },
-      { name: "Acne Care / Skin Care", price: "R300" },
-      { name: "Detox Drip", price: "R600" },
-      { name: "Glow Drip", price: "R500" },
-      { name: "Recovery Drip", price: "R400" },
-      { name: "Energy Drip", price: "R450" },
-    ],
-    badge: null,
-    accent: "gold",
-  },
-];
-
-const newServices = [
+const services = [
   {
     icon: ShieldCheck,
     title: "Prevention",
@@ -173,9 +120,6 @@ const accentMap: Record<string, { ring: string; glow: string; chip: string; dot:
 };
 
 const ServicesSection = () => {
-  const [activeTab, setActiveTab] = useState<"current" | "new">("current");
-  const services = activeTab === "current" ? currentServices : newServices;
-
   return (
     <section id="services" className="py-24 relative overflow-hidden bg-gradient-to-b from-background via-muted/30 to-background">
       {/* Decorative background orbs */}
@@ -200,134 +144,76 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        {/* Catalogue toggle */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex justify-center mb-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          <div className="relative inline-flex bg-card/80 backdrop-blur-sm border border-border rounded-full p-1.5 shadow-lg">
-            {/* Sliding indicator */}
-            <motion.div
-              layout
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-              className="absolute inset-y-1.5 bg-gradient-to-r from-gold to-gold-dark rounded-full shadow-md"
-              style={{
-                left: activeTab === "current" ? "6px" : "50%",
-                right: activeTab === "current" ? "50%" : "6px",
-              }}
-            />
-            <button
-              onClick={() => setActiveTab("current")}
-              className={`relative z-10 px-6 sm:px-8 py-2.5 rounded-full text-sm font-bold transition-colors ${
-                activeTab === "current" ? "text-accent-foreground" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Current
-            </button>
-            <button
-              onClick={() => setActiveTab("new")}
-              className={`relative z-10 px-6 sm:px-8 py-2.5 rounded-full text-sm font-bold transition-colors flex items-center gap-2 ${
-                activeTab === "new" ? "text-accent-foreground" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              From 1 May 2026
-              <span className={`text-[9px] font-black px-1.5 py-0.5 rounded ${
-                activeTab === "new" ? "bg-accent-foreground/20 text-accent-foreground" : "bg-gold text-accent-foreground animate-pulse"
-              }`}>NEW</span>
-            </button>
-          </div>
-        </motion.div>
+          {services.map((service, i) => {
+            const a = accentMap[service.accent];
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, type: "spring", stiffness: 100 }}
+                whileHover={{ y: -6 }}
+                className={`group relative bg-card rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-2xl ring-1 ring-transparent ${a.ring} transition-all duration-500`}
+              >
+                {/* Animated gradient orb */}
+                <div className={`absolute -top-16 -right-16 w-40 h-40 rounded-full ${a.orb} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
 
-        <AnimatePresence mode="wait">
-          {activeTab === "new" && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="flex justify-center mb-8"
-            >
-              <div className="inline-flex items-center gap-2 text-sm bg-gold/10 border border-gold/30 text-foreground px-4 py-2 rounded-full">
-                <CalendarCheck className="w-4 h-4 text-gold-dark" />
-                Effective <strong className="font-bold">1 May 2026</strong> · Now with Mental Health
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
-            {services.map((service, i) => {
-              const a = accentMap[service.accent];
-              return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08, type: "spring", stiffness: 100 }}
-                  whileHover={{ y: -6 }}
-                  className={`group relative bg-card rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-2xl ring-1 ring-transparent ${a.ring} transition-all duration-500`}
-                >
-                  {/* Animated gradient orb */}
-                  <div className={`absolute -top-16 -right-16 w-40 h-40 rounded-full ${a.orb} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-
-                  {/* Header */}
-                  <div className={`relative bg-gradient-to-br ${a.gradient} px-6 pt-6 pb-5 border-b border-border/50`}>
-                    <div className="flex items-start gap-4">
-                      <motion.div
-                        whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                        transition={{ duration: 0.5 }}
-                        className={`w-14 h-14 rounded-2xl ${a.iconBg} flex items-center justify-center shadow-lg shrink-0`}
-                      >
-                        <service.icon className={`w-7 h-7 ${a.iconColor}`} strokeWidth={2.2} />
-                      </motion.div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-xl font-heading font-bold leading-tight">{service.title}</h3>
-                        <p className="text-xs text-muted-foreground mt-1 leading-snug">{service.subtitle}</p>
-                      </div>
+                {/* Header */}
+                <div className={`relative bg-gradient-to-br ${a.gradient} px-6 pt-6 pb-5 border-b border-border/50`}>
+                  <div className="flex items-start gap-4">
+                    <motion.div
+                      whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                      transition={{ duration: 0.5 }}
+                      className={`w-14 h-14 rounded-2xl ${a.iconBg} flex items-center justify-center shadow-lg shrink-0`}
+                    >
+                      <service.icon className={`w-7 h-7 ${a.iconColor}`} strokeWidth={2.2} />
+                    </motion.div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-xl font-heading font-bold leading-tight">{service.title}</h3>
+                      <p className="text-xs text-muted-foreground mt-1 leading-snug">{service.subtitle}</p>
                     </div>
                   </div>
+                </div>
 
-                  {/* Items */}
-                  <div className="px-6 py-5">
-                    <ul className="space-y-1">
-                      {service.items.map((item, idx) => (
-                        <motion.li
-                          key={item.name}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.08 + idx * 0.03 }}
-                          className="flex items-center justify-between py-2.5 px-2 -mx-2 rounded-lg text-sm hover:bg-muted/60 transition-colors group/item"
-                        >
-                          <span className="flex items-center gap-2.5 min-w-0">
-                            <span className={`w-1.5 h-1.5 rounded-full ${a.dot} shrink-0 group-hover/item:scale-150 transition-transform`} />
-                            <span className="truncate">{item.name}</span>
-                          </span>
-                          <span className={`font-bold ${a.price} ml-3 whitespace-nowrap tabular-nums`}>{item.price}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                {/* Items */}
+                <div className="px-6 py-5">
+                  <ul className="space-y-1">
+                    {service.items.map((item, idx) => (
+                      <motion.li
+                        key={item.name}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.08 + idx * 0.03 }}
+                        className="flex items-center justify-between py-2.5 px-2 -mx-2 rounded-lg text-sm hover:bg-muted/60 transition-colors group/item"
+                      >
+                        <span className="flex items-center gap-2.5 min-w-0">
+                          <span className={`w-1.5 h-1.5 rounded-full ${a.dot} shrink-0 group-hover/item:scale-150 transition-transform`} />
+                          <span className="truncate">{item.name}</span>
+                        </span>
+                        <span className={`font-bold ${a.price} ml-3 whitespace-nowrap tabular-nums`}>{item.price}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
 
-                    {service.badge && (
-                      <div className={`mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${a.chip}`}>
-                        <GraduationCap className="w-3.5 h-3.5" />
-                        {service.badge}
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </AnimatePresence>
+                  {service.badge && (
+                    <div className={`mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${a.chip}`}>
+                      <GraduationCap className="w-3.5 h-3.5" />
+                      {service.badge}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
 
         {/* Online Bookings CTA */}
         <motion.div
